@@ -1,0 +1,58 @@
+{
+    "variables": {
+        "client_id": "51740694-634d-4fe0-9291-13c81048c5a4",
+        "client_secret": "xxxxx~m17sH~4hxxxxxY0Exxxxx0sBXxxx",
+        "tenant_id": "84c31ca0-ac3b-4eae-ad11-519d80233e6f",
+        "subscription_id": "46c87f99-fa99-46a0-b363-af41c7ae3fad"
+    },
+
+
+	"builders": [{
+		"type": "azure-arm",
+
+        "client_id": "{{user `client_id`}}",
+        "client_secret": "{{user `client_secret`}}",
+        "tenant_id": "{{user `tenant_id`}}",
+        "subscription_id": "{{user `subscription_id`}}",
+
+        "managed_image_name": "GurusPackerMadeImage",
+        "managed_image_resource_group_name": "AzureProjectByGuru",
+
+        "os_type": "Linux",
+        "image_publisher": "Canonical",
+        "image_offer": "UbuntuServer",
+        "image_sku": "18.04-LTS",
+
+        "location": "East US",
+        "vm_size": "Standard_B1s",
+
+        "azure_tags": {
+            "env": "DevOps",
+            "production": "UdacityUzb"
+        }
+	}],
+	"provisioners": [{
+        "execute_command": "chmod +x {{ .Path }}; {{ .Vars }} sudo -E sh '{{ .Path }}'",
+        "inline": [
+          "echo 'Hello, World from Guru!' > index.html",
+                "echo '[Unit]' > http.service",
+                "echo 'Description=HTTP Hello World' >> http.service",
+                "echo 'After=network.target' >> http.service",
+                "echo 'StartLimitIntervalSec=0' >> http.service",
+                "echo '[Service]' >> http.service",
+                "echo 'Type=simple' >> http.service",
+                "echo 'Restart=always' >> http.service",
+                "echo 'RestartSec=1' >> http.service",
+                "echo 'User=packer' >> http.service",
+                "echo 'ExecStart=/usr/bin/nohup sudo /bin/busybox httpd -f -p 80 -h /home/packer' >> http.service",
+                "echo '[Install]' >> http.service",
+                "echo 'WantedBy=multi-user.target' >> http.service",
+                "sudo mv http.service /etc/systemd/system",
+                "sudo chown root:root /etc/systemd/system/http.service",
+                "sudo chmod 755 /etc/systemd/system/http.service",
+                "sudo systemctl enable http"
+        ],
+        "inline_shebang": "/bin/sh -x",
+        "type": "shell"
+      }]
+}
