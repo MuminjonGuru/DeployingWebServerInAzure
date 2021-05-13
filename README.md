@@ -50,7 +50,7 @@ All the variables are specified in the **variables.tf** file to make future conf
 ![](IaaSTerraformPackerAzureRMLoadBalancingScale.png)
 
 ## Output
-![](Screenshot 2021-05-13 151608.png)
+![]("Screenshot 2021-05-13 151608.png")
 
 ```powershell
 Saved the plan to: solution.plan
