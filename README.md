@@ -46,6 +46,8 @@ All the variables are specified in the **variables.tf** file to make future conf
 
 4) terraform destroy
 ```
+## Deployed Policy
+![Screenshot]([DeployingWebServerInAzure/IaaSTerraformPackerAzureRMLoadBalancingScale.png at main · MuminjonGuru/DeployingWebServerInAzure (github.com)](https://github.com/MuminjonGuru/DeployingWebServerInAzure/blob/main/IaaSTerraformPackerAzureRMLoadBalancingScale.png))
 
 ## Output
 ```powershell
